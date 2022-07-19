@@ -1,5 +1,5 @@
 <img
-  src="./Image/RetroBook.jpg"
+  src="./image/RetroBook.jpg"
   width="30%"
   height="30%"
 />
