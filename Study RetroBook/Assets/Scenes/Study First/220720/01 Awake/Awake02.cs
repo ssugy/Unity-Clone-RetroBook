@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+[System.Serializable]
 public class MyClass
 {
     public int a = 1;
@@ -14,7 +15,7 @@ public class Awake02 : MonoBehaviour
 {
     public MyClass myClass = new MyClass();
 
-    private int num = 1;
+    [SerializeField] private int num = 0;
 
     private void Start()
     {
