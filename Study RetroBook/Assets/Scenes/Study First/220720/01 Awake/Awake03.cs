@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Awake03 : MonoBehaviour
 {
-    // //1번 Awake와 start의 순서
+    //1번 Awake와 start의 순서
     //private void Awake()
     //{
     //    print(name + " Awake 실행");
@@ -14,4 +14,9 @@ public class Awake03 : MonoBehaviour
     //{
     //    print($"{name} Start 실행");
     //}
+
+    private void Start()
+    {
+        GameObject.Find("Awake 2번").GetComponent<Awake02>();
+    }
 }
