@@ -13,12 +13,12 @@ public class MyClass
 
 public class Awake02 : MonoBehaviour
 {
-    public MyClass myClass = new MyClass();
+    public MyClass myClass = new(); // 단순화 가능함. c#문법
 
     [SerializeField] private int num = 0;
 
     private void Start()
     {
-        
+        print(num);
     }
 }
