@@ -2,6 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * 작성자 : 권용훈 (2022.7.21 목)
+ * 
+ * 스터디에서 이야기 할 내용
+ * 1. switch문의 패턴매칭
+ * 
+ * 골드메탈 유튜브 : https://youtu.be/j6XLEqgq-dE
+ * 1) 변수의 선언, 지역변수 전역변수 차이
+ * 2) 그룹형 변수(배열, 리스트)
+ * 3) 연산자 - 비교, 논리, 삼항
+ * 4) 키워드, 조건문(switch관련 추가문법 작성함), 반복문
+ * 5) 함수 선언
+ * 6) 클래스 작성, 상속 - Actor.cs // Player.cs Actor클래스를 상속함
+ */
 public class NewBehaviourScript : MonoBehaviour
 {
     void Start()
@@ -99,7 +113,7 @@ public class NewBehaviourScript : MonoBehaviour
         string condition = isBadCondition ? "나쁨" : "좋음";
         #endregion
 
-        #region 4. 키워드, 5. 조건문
+        #region 4. 키워드, 5. 조건문, 6. 반복문
         // int float string bool new List  변수이름 사용 못함. 값으로도 사용 못함
 
         if (condition == "나쁨")
@@ -211,10 +225,64 @@ public class NewBehaviourScript : MonoBehaviour
         {
             print("이 지역에 있는 몬스터 : " + item);
         }
+
+        health = Heal(health);
+
+        for (int index = 0; index < monsters.Length; index++)
+        {
+            print("용사는 " + monsters[index] + "에게 " + Battle(monsterLevels[index]));
+        }
+        #endregion
+
+        #region 8. 클래스 - 외부에서 파일 만듬.
+        //Actor player = new Actor(); // 접근자를 확인해야된다.
+        Player player = new Player(); // Player 클래스에게 Actor를 상속하고 난 뒤 변경.
+        player.id = 0;
+        player.name = "나법사";
+        player.title = "현명한";
+        player.strength = 2.4f;
+        player.weapon = "나무 지팡이";
+        Debug.Log(player.Talk());
+        Debug.Log(player.HasWeapon());
+
+        player.LevelUp();
+        Debug.Log($"{player.name}의 레벨은 {player.level}입니다.");
+
+        print(player.move());   // 부모의 것을 사용할 수 있고, 자기 자신이 가지고있는 move()을 사용 할 수 있다.
+
         #endregion
     }
 
     #region 7. 함수 28:15
+    // Heal이라는 함수는 용사의 health를 받아서 일정수치를 더한뒤에 그 값을 리턴하는 함수.
+    int Heal(int currentHealth)
+    {
+        currentHealth += 10;
+        print("힐을 받았습니다. " + currentHealth);
+        return currentHealth;
+    }
+
+    // 따로 값을 받지않고 
+    void Heal()
+    {
+        //health    // Start의 지역변수로 선언되어 있으면 사용할 수 없다. 그래서 전역변수에 선언되어 있어야 사용가능하다.
+    }
+
+    int level = 5;  // 용사의 레벨을 전역변수로 선언함
+    string Battle(int monsterLevel)
+    {
+        string result;
+        if (level >= monsterLevel)
+        {
+            result = "이겼습니다.";
+        }
+        else
+        {
+            result = "졌습니다.";
+        }
+
+        return result;
+    }
 
     #endregion
 }
