@@ -1,6 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using System;
+
+static class TestClass
+{
+    public struct Test
+    {
+        public int x;
+    }
+    public static int a = 0;
+}
 
 public class EventFunctions : MonoBehaviour
 {
@@ -8,8 +18,8 @@ public class EventFunctions : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            print(gameObject.activeSelf);
-            gameObject.SetActive(!gameObject.activeSelf);   // 이게 안되는게, setactive(false)하면 update자체가 안돌아감.
+            
+
         }
     }
 
