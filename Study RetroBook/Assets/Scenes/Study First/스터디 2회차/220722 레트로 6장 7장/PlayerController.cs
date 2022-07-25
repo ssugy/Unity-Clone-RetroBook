@@ -70,5 +70,7 @@ public class PlayerController : MonoBehaviour
     public void Die()
     {
         gameObject.SetActive(false);    // 오브젝트 비활성화
+        Chapter8_GameManager gameManager = FindObjectOfType<Chapter8_GameManager>();
+        gameManager.EndGame();
     }
 }
