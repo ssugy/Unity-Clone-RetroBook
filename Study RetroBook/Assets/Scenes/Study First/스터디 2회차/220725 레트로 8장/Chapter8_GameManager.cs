@@ -38,6 +38,20 @@ public class Chapter8_GameManager : MonoBehaviour
                 SceneManager.LoadScene("chapter6"); // 씬매니저 추가하려면 using UnityEngine.SceneManagement; 필요하다
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            print("test");
+            Vector3 A = new Vector3(1, 1, 0);
+            Vector3 B = new Vector3(1, 0, 0);
+            print("코스 : " + Mathf.Rad2Deg * Mathf.Acos(Vector3.Dot(A, B)/(A.magnitude*B.magnitude)));
+            print(Mathf.Rad2Deg *Mathf.Atan2((A-B).y, (A-B).x));
+
+
+            float Dot = Vector3.Dot(A, B) * 1.0f;
+            float Angle = Mathf.Acos(Dot) * 1.0f;
+            print(Mathf.Acos(Vector3.Dot(A, B)));
+        }
     }
 
     public void EndGame()

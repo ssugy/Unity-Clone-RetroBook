@@ -14,13 +14,19 @@ static class TestClass
 
 public class EventFunctions : MonoBehaviour
 {
+    private void FixedUpdate()
+    {
+        //print("Fixed Update");
+    }
+
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            
+        //print("Update");
+    }
 
-        }
+    private void LateUpdate()
+    {
+        //print("레이트 Update");
     }
 
     #region 이벤트 함수
