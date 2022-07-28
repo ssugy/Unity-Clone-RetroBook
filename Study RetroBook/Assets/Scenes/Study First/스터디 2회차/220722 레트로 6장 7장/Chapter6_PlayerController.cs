@@ -16,7 +16,7 @@ using UnityEngine;
  *  - Addforce : 힘을 주는 것 이기 때문에, 관성이 존재합니다.
  *  - velocity : 속도가 즉각적으로 변합니다.
  */
-public class PlayerController : MonoBehaviour
+public class Chapter6_PlayerController : MonoBehaviour
 {
     public Rigidbody playerRigidbody;
     public float speed = 8f;

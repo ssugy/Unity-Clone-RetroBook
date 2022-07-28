@@ -45,5 +45,7 @@ public class Chapter10_Move : MonoBehaviour
             transform.Rotate(new Vector3(0, 0, -180) * Time.deltaTime);
             childTransForm.Rotate(new Vector3(0, -180, 0) * Time.deltaTime);
         }
+
+        
     }
 }

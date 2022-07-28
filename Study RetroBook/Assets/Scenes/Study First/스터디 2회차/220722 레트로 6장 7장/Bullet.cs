@@ -28,7 +28,7 @@ public class Bullet : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // 상대방의 PlayterController 가져온다.
-            PlayerController playerController = other.GetComponent<PlayerController>();
+            Chapter6_PlayerController playerController = other.GetComponent<Chapter6_PlayerController>();
 
             // 상대방의 PlayerController를 제대로 가져왔다면,
             if (playerController != null)
