@@ -51,6 +51,7 @@ public class Chapter8_GameManager : MonoBehaviour
             float Dot = Vector3.Dot(A, B) * 1.0f;
             float Angle = Mathf.Acos(Dot) * 1.0f;
             print(Mathf.Acos(Vector3.Dot(A, B)));
+
         }
     }
 
