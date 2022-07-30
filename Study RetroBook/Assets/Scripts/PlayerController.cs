@@ -14,11 +14,42 @@ public class PlayerController : MonoBehaviour {
    private AudioSource playerAudio; // 사용할 오디오 소스 컴포넌트
 
    private void Start() {
-       // 초기화
+        // 초기화
+        playerRigidbody = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        playerAudio = GetComponent<AudioSource>();
    }
 
    private void Update() {
-       // 사용자 입력을 감지하고 점프하는 처리
+        // 사용자 입력을 감지하고 점프하는 처리
+        if (isDead)
+        {
+            return;
+        }
+
+        // 마우스 왼쪽 버튼을 눌렀으며 && 최대 점프횟수(2)에 도달하지 않았다면
+        if (Input.GetMouseButtonDown(0) && jumpCount < 2)
+        {
+            //점프횟수 추가
+            jumpCount++;
+
+            // 점프 직전에 속도를 순간적으로 (0, 0)제로로 변경
+            playerRigidbody.velocity = Vector3.zero;
+            // 리지드바디 위쪽으로 힘 추가(점프 힘)
+            playerRigidbody.AddForce(new Vector2(0, jumpForce));
+            // 점프용 오디오 소스 재생
+            playerAudio.Play();
+        }
+        else if (Input.GetMouseButtonUp(0) && playerRigidbody.velocity.y > 0)
+        {
+            // 마우스 왼쪽 버튼에서 손을 떼는 순간 && 위로 상승중일 때
+            // 현재 속도를 절반으로 변경 - 마우스를 꾹 누르는 것과, 떼는 것에 대한 점프 차이를 두기 위함
+            playerRigidbody.velocity *= 0.5f;
+        }
+
+        // 애니메이터의 그라운드디드 파라미터를 isGrounded값으로 변경 - 이것밖에 없나, 다른데서도 이렇게 쓰나?? 업데이트 문 안에서?
+        // enum으로 플레이어 상태 만들어서 여기서 if로 체크해서 하면되나? 그게 나을 것 같은데
+        animator.SetBool("Grounded", isGrounded);
    }
 
    private void Die() {
@@ -30,10 +61,20 @@ public class PlayerController : MonoBehaviour {
    }
 
    private void OnCollisionEnter2D(Collision2D collision) {
-       // 바닥에 닿았음을 감지하는 처리
+        print("충돌발생");
+        // 바닥에 닿았음을 감지하는 처리
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+            print("그라운드");
+        }
    }
 
    private void OnCollisionExit2D(Collision2D collision) {
-       // 바닥에서 벗어났음을 감지하는 처리
-   }
+        // 바닥에서 벗어났음을 감지하는 처리
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = false;
+        }
+    }
 }

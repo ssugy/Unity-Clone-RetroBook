@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - "\uD14C\uC2A4\uD2B8\uC6A9"
+  - Ground
   layers:
   - Default
   - TransparentFX
