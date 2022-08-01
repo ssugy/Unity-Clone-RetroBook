@@ -53,28 +53,48 @@ public class PlayerController : MonoBehaviour {
    }
 
    private void Die() {
-       // 사망 처리
+        // Die 트리거 겟
+        animator.SetTrigger("Die");
+
+        // 오디오 소스에 할당된 오디오 클립을 deathClip으로 변경
+        playerAudio.clip = deathClip;
+        playerAudio.Play();
+
+        // 속도를 0, 0으로 변경
+        playerRigidbody.velocity = Vector2.zero;
+        // 사망상태를 true로 변경
+        isDead = true;
    }
 
    private void OnTriggerEnter2D(Collider2D other) {
-       // 트리거 콜라이더를 가진 장애물과의 충돌을 감지
+        // 트리거 콜라이더를 가진 장애물과의 충돌을 감지
+        if (other.CompareTag("Dead") && !isDead)
+        {
+            Die();
+        }
    }
 
    private void OnCollisionEnter2D(Collision2D collision) {
-        print("충돌발생");
         // 바닥에 닿았음을 감지하는 처리
-        if (collision.gameObject.CompareTag("Ground"))
+        // 어떤 콜라이더와 닿았으며, 충돌 표면이 위쪽을 보고 있으면
+        //if (collision.gameObject.CompareTag("Ground")) // 기존 코드
+        //print(collision.contacts[0].normal.y);    // 이게 일반적일때에는 1이나온다. 0.7f이상이라는 것은, 대각선의 물체의 노말벡터를 말하는 것.
+        if (collision.contacts[0].normal.y > 0.7f)
         {
+            // 누적 점프횟수를 0으로 리셋
             isGrounded = true;
-            print("그라운드");
+            jumpCount = 0;
         }
    }
 
    private void OnCollisionExit2D(Collision2D collision) {
         // 바닥에서 벗어났음을 감지하는 처리
-        if (collision.gameObject.CompareTag("Ground"))
+        /*if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = false;
-        }
+        }*/
+
+        // 이제 바닥에서만 떨어지는게 아니라, 다양한 태그, 환경에서 떨어져도 모두 groundout으로 처리하려고 코드 변경
+        isGrounded = false;
     }
 }
