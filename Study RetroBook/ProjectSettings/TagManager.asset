@@ -6,6 +6,7 @@ TagManager:
   tags:
   - "\uD14C\uC2A4\uD2B8\uC6A9"
   - Ground
+  - Dead
   layers:
   - Default
   - TransparentFX
@@ -42,4 +43,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 910022757
+    locked: 0
+  - name: Middleground
+    uniqueID: 2858669329
+    locked: 0
+  - name: Foreground
+    uniqueID: 3345003127
     locked: 0
