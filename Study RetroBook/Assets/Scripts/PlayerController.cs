@@ -3,7 +3,7 @@
 // PlayerController는 플레이어 캐릭터로서 Player 게임 오브젝트를 제어한다.
 public class PlayerController : MonoBehaviour {
    public AudioClip deathClip; // 사망시 재생할 오디오 클립
-   public float jumpForce = 700f; // 점프 힘
+   public float jumpForce = 700f; // 점프 힘 - 점프도 무슨 속도로하지 이걸 힘으로함..?
 
    private int jumpCount = 0; // 누적 점프 횟수
    private bool isGrounded = false; // 바닥에 닿았는지 나타냄
@@ -36,7 +36,9 @@ public class PlayerController : MonoBehaviour {
             // 점프 직전에 속도를 순간적으로 (0, 0)제로로 변경
             playerRigidbody.velocity = Vector3.zero;
             // 리지드바디 위쪽으로 힘 추가(점프 힘)
-            playerRigidbody.AddForce(new Vector2(0, jumpForce));
+            //playerRigidbody.AddForce(new Vector2(0, jumpForce));
+            playerRigidbody.velocity = new Vector2(0, 10);
+
             // 점프용 오디오 소스 재생
             playerAudio.Play();
         }
@@ -64,6 +66,9 @@ public class PlayerController : MonoBehaviour {
         playerRigidbody.velocity = Vector2.zero;
         // 사망상태를 true로 변경
         isDead = true;
+
+        // 싱글톤으로 제작된 게임오브젝트의 Die함수 실행
+        GameManager.instance.OnPlayerDead();
    }
 
    private void OnTriggerEnter2D(Collider2D other) {
