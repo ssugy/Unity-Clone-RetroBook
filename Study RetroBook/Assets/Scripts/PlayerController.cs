@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour {
         isDead = true;
 
         // 싱글톤으로 제작된 게임오브젝트의 Die함수 실행
-        GameManager.instance.OnPlayerDead();
+        UniRun.GameManager.instance.OnPlayerDead();
    }
 
    private void OnTriggerEnter2D(Collider2D other) {

@@ -5,12 +5,15 @@ using UnityEngine;
 /**
  * 바닥 회전 장치
  */
-public class Rotator : MonoBehaviour
+namespace RotatorGame
 {
-    public float rotationSpeed = 60f;
-
-    private void Update()
+    public class Rotator : MonoBehaviour
     {
-        transform.Rotate(0f, rotationSpeed * Time.deltaTime, 0f);    // Y축 회전
+        public float rotationSpeed = 60f;
+
+        private void Update()
+        {
+            transform.Rotate(0f, rotationSpeed * Time.deltaTime, 0f);    // Y축 회전
+        }
     }
 }
