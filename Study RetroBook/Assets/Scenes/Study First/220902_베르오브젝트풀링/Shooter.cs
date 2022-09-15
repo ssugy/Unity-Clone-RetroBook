@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,9 +15,15 @@ public class Shooter : MonoBehaviour
     private Rigidbody ballRigidbody;
 
     private IObjectPool<ball> ballPool;
-
+    
     private void Awake()
     {
+        //ObjectPool<ball>(1함수, 2번함수, 3번함수, 4번함수, 최대사이즈); 
+        //1번함수  ball을 만들 때 쓰는것.
+        //2번함수의 용도 다른데에서가져다사용할 때,
+        //3번함수 = 반납할때
+        //4번함수 = 파괴할때
+        //5번파라미터 = pool에 담는 최대 갯수
         ballPool = new ObjectPool<ball>(CreateBullet, OnGetBullet, OnReleaseBullet, OnDestroyBullet, maxSize:20);  //이렇게 사용하는게 2021기능. 여기에 파라미터 모두 채워줘야된다.
     }
     private void Update()
@@ -52,16 +59,19 @@ public class Shooter : MonoBehaviour
         return bullet;
     }
 
+    // 꺼내는 행위
     private void OnGetBullet(ball bullet)
     {
         bullet.gameObject.SetActive(true);
     }
 
+    // 반납
     private void OnReleaseBullet(ball bullet)
     {
         bullet.gameObject.SetActive(false);
     }
 
+    // 파괴
     private void OnDestroyBullet(ball bullet)
     {
         Destroy(bullet.gameObject);
